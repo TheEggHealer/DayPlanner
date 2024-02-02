@@ -6,23 +6,27 @@
       <Task 
         title="Bädda sängen"
         description=""
-        :completed=true
-      />
+        :completed=true />
       <Task 
         title="Borsta tänderna"
         description=""
-        :completed=false
-      />
+        :completed=false />
       <Task 
         title="Diska"
         description=""
-        :completed=false
-      />
+        :completed=false />
       <Task 
         title="Plocka undan saker (10 min)"
         description="Om det inte finns något att plocka undan, damma / torka av ytor."
-        :completed=false
-      />
+        :completed=false />
+      <Task 
+        title="Gymma"
+        description=""
+        :completed=false />
+      <Task 
+        title="Exjobb"
+        description=""
+        :completed=false />
     </div>
 
     <div class="quote-panel">
