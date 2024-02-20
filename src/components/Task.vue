@@ -4,13 +4,13 @@
       <p class="text-bold">{{ title }}</p>
       <p v-if="description" style="margin-top: 0.5rem">{{ description }}</p>
     </div>
-    <button v-if="!completed">Klar</button>
+    <button v-if="!completed" @click="completeTask">Klar</button>
   </div>
 </template>
 
 
 <script>
-import { toRefs } from 'vue';
+import { toRefs, ref } from 'vue';
 
 export default {
   props: {
@@ -19,12 +19,18 @@ export default {
     completed: Boolean,
   },
   setup(props) {
-    const { title, description, completed } = toRefs(props);
+    const { title, description } = toRefs(props);
+    const completed = ref(props.completed);
     
+    function completeTask() {
+      completed.value = true;
+    }
+
     return {
       title,
       description,
       completed,
+      completeTask,
     }
   }
 }
