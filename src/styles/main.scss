@@ -6,6 +6,7 @@ $color-primary: #F6C852;
 $color-secondary: #E88E5C;
 $color-danger: #d43c3c;
 $color-text: #25231E;
+$color-input: #ececec;
 $color-background: #F8F8F8;
 $color-diasbled: #00000069;
 $color-card-highlight: #F8EAC7;
@@ -83,14 +84,20 @@ p.tiny {
 
 
 // ================================== Inputs
+form, label, input, button {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+}
+
+form, label, input {
+  width: 100%;
+}
+
 button {
   border: none;
   outline: none;
   background: none;
   cursor: pointer;
-
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1rem;
   font-weight: 700;
 
   color: $color-text;
@@ -116,6 +123,21 @@ button {
   }
 }
 
+input {
+  height: 34px;
+  border-radius: 8px;
+  background-color: $color-input;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  transition: border 200ms ease;
+  border: 1px solid transparent;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
 
 
 // ================================== Other

@@ -1,15 +1,25 @@
 <template>
-  <Header />
-  <router-view/>
+  <div v-if="!$store.state.isAuthReady">
+    <!-- TODO: Implement loading -->
+  </div>
+  <div v-else-if="$store.state.user == null">
+    <auth />
+  </div>
+  <div v-else>
+    <Header />
+    <router-view/>
+  </div>
 </template>
 
 <script>
+import Auth from './views/Auth.vue';
 import Header from './components/Header.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
+    Auth,
   },
 }
 </script>
