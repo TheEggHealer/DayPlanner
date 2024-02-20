@@ -4,6 +4,7 @@
 // ================================== Variables
 $color-primary: #F6C852;
 $color-secondary: #E88E5C;
+$color-danger: #d43c3c;
 $color-text: #25231E;
 $color-background: #F8F8F8;
 $color-diasbled: #00000069;
@@ -63,6 +64,9 @@ p.tiny {
 .text--secondary {
   color: $color-secondary;
 }
+.text--danger {
+  color: $color-danger;
+}
 
 
 
@@ -105,6 +109,10 @@ button {
   &.button-text {
     background-color: transparent;
     box-shadow: none;
+  }
+
+  &.button--danger {
+    background-color: $color-danger;
   }
 }
 

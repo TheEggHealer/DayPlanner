@@ -31,8 +31,8 @@
     </div>
 
     <div class="continue-panel">
-      <button class="button-text">Inte hemma</button>
-      <button>Avsluta dag</button>
+      <button class="button-text text--danger">Inte hemma</button>
+      <button class="button--danger">Avsluta dag</button>
     </div>
   </div>
 </template>
