@@ -3,30 +3,12 @@
     <h5 style="margin-bottom: 2rem">Att göra idag:</h5>
 
     <div class="task-list">
-      <Task 
-        title="Bädda sängen"
-        description=""
-        :completed=true />
-      <Task 
-        title="Borsta tänderna"
-        description=""
-        :completed=false />
-      <Task 
-        title="Diska"
-        description=""
-        :completed=false />
-      <Task 
-        title="Plocka undan saker (10 min)"
-        description="Om det inte finns något att plocka undan, damma / torka av ytor."
-        :completed=false />
-      <Task 
-        title="Gymma"
-        description=""
-        :completed=false />
-      <Task 
-        title="Exjobb"
-        description=""
-        :completed=false />
+      <div v-for="task in $store.state.active_tasks">
+        <Task 
+          :title=task.title
+          :description=task.description
+          :completed=task.completed />
+      </div>
     </div>
 
     <div class="quote-panel">
@@ -35,7 +17,7 @@
     </div>
 
     <div class="continue-panel">
-      <button class="button-text text--danger">Inte hemma</button>
+      <button class="button-text text--danger" @click="$store.dispatch('shouldUpdateActiveTasks')">Inte hemma</button>
       <button class="button--danger">Avsluta dag</button>
     </div>
   </div>
@@ -43,12 +25,19 @@
 
 <script>
 import Task from '@/components/Task.vue';
+import { useStore } from 'vuex';
+import {
+  getTasks,
+} from '../store/backend'
 
 export default {
   name: 'Home',
   components: {
     Task,
   },
+  setup() {
+    
+  }
 }
 </script>
 

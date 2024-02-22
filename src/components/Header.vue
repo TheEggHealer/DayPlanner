@@ -5,13 +5,28 @@
       <h4>22 Januari</h4>
     </div>
     <div class="streak-panel">
-
+      <button @click="debug()">Debug</button>
     </div>
   </div>
 </template>
 <script>
+import { useStore } from 'vuex'
+
 export default {
   name: 'Header',
+
+  setup() {
+    const store = useStore()
+
+    const debug = async () => {
+      console.log(store.commit('shouldUpdateActiveTasks'))
+      
+    }
+
+    return {
+      debug
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
