@@ -3,11 +3,12 @@
     <h5 style="margin-bottom: 2rem">Att göra idag:</h5>
 
     <div class="task-list">
-      <div v-for="task in $store.state.active_tasks">
+      <div v-for="task in $store.state.active_tasks" :key="task.id">
         <Task 
           :title=task.title
           :description=task.description
-          :completed=task.completed />
+          :completed=task.completed 
+          @complete="completeTask(task.id)"/>
       </div>
     </div>
 
@@ -17,6 +18,7 @@
     </div>
 
     <div class="continue-panel">
+      <button class="button-text text--disabled">Återställ dag</button>
       <button class="button-text text--danger" @click="$store.dispatch('shouldUpdateActiveTasks')">Inte hemma</button>
       <button class="button--danger">Avsluta dag</button>
     </div>
@@ -36,7 +38,22 @@ export default {
     Task,
   },
   setup() {
-    
+    const store = useStore();
+
+    const completeTask = async (id) => {
+      store.state.active_tasks.forEach(task => {
+        if (task.id === id) {
+          task.completed = true;
+        }
+      });
+
+      store.commit('setActiveTasks', store.state.active_tasks);
+      await store.dispatch('uploadActiveTasks')
+    }
+
+    return {
+      completeTask,
+    }
   }
 }
 </script>

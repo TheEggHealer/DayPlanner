@@ -18,12 +18,14 @@ export default {
     description: String,
     completed: Boolean,
   },
-  setup(props) {
+  emits: ['complete'],
+  setup(props, { emit }) {
     const { title, description } = toRefs(props);
     const completed = ref(props.completed);
     
     function completeTask() {
       completed.value = true;
+      emit('complete');
     }
 
     return {
