@@ -3,7 +3,7 @@
     <h5 style="margin-bottom: 2rem">Att göra idag:</h5>
 
     <div class="task-list">
-      <div v-for="task in $store.state.active_tasks" :key="task.id">
+      <div v-for="task in activeTasks" :key="task.id+task.completed">
         <Task 
           :title=task.title
           :description=task.description
@@ -18,7 +18,7 @@
     </div>
 
     <div class="continue-panel">
-      <button class="button-text text--disabled">Återställ dag</button>
+      <button class="button-text text--disabled" @click="resetTasks">Återställ dag</button>
       <button class="button-text text--danger" @click="$store.dispatch('shouldUpdateActiveTasks')">Inte hemma</button>
       <button class="button--danger">Avsluta dag</button>
     </div>
@@ -28,9 +28,7 @@
 <script>
 import Task from '@/components/Task.vue';
 import { useStore } from 'vuex';
-import {
-  getTasks,
-} from '../store/backend'
+import { computed } from 'vue';
 
 export default {
   name: 'Home',
@@ -41,18 +39,34 @@ export default {
     const store = useStore();
 
     const completeTask = async (id) => {
-      store.state.active_tasks.forEach(task => {
+      const updatedTasks = store.state.active_tasks.map(task => {
         if (task.id === id) {
           task.completed = true;
         }
+        return task;
       });
 
-      store.commit('setActiveTasks', store.state.active_tasks);
+      store.commit('setActiveTasks', updatedTasks);
+      await store.dispatch('uploadActiveTasks')
+    }
+
+    const resetTasks = async () => {
+      const updatedTasks = store.state.active_tasks.map(task => {
+        task.completed = false;
+        return task;
+      });
+
+      store.commit('setActiveTasks', updatedTasks);
       await store.dispatch('uploadActiveTasks')
     }
 
     return {
+      activeTasks: computed(() => {
+        console.log('Computed active tasks', store.state.active_tasks)
+        return store.state.active_tasks
+      }),
       completeTask,
+      resetTasks,
     }
   }
 }
