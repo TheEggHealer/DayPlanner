@@ -52,4 +52,29 @@ const checkForCompletion = (store) => {
   // TODO: Implement this function
 }
 
+const calculateStreak = (store) => {
+  const history = store.state.userData.history
+
+  // Latest continuous streak
+  let streak = 0
+  const tmpDate = new Date()
+  for (let i = history.length - 1; i >= 0; i--) {
+    const date = new Date(history[i].timestamp)
+    if (date.getDate() === tmpDate.getDate()) {
+      streak++
+    } else {
+      break
+    }
+    tmpDate.setDate(tmpDate.getDate() - 1)
+  }
+
+  // This week's streak
+  const states = []
+  const dayInWeek = new Date().getDay()
+  for (let i = history.length - 1; i >= history.length - 1 - dayInWeek; i--) {
+    
+  }
+
+}
+
 export { shouldUpdateActiveTasks, getTasksFromSchedule, getTasks }

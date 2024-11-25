@@ -43,6 +43,8 @@ const store = createStore({
     setUserData(state, payload) {
       state.userData = payload
       console.log('User data updated: ', state.userData)
+
+      calculateStreak(store)
     },
     setSchedule(state, payload) {
       state.schedule = payload
@@ -100,7 +102,7 @@ const store = createStore({
         last_updated_tasks: Date.now()
       })
       console.log('New active tasks uploaded to Firestore')
-    }
+    },
   },
   modules: {
   }
